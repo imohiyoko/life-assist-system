@@ -1,0 +1,12 @@
+# Webフレームワーク
+fastapi
+uvicorn[standard]
+python-multipart
+
+# AI/MLライブラリ
+torch
+openai-whisper
+
+# 話者分離ライブラリ
+pyannote.audio
+PyYAML
