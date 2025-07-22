@@ -26,8 +26,8 @@ services:
         condition: service_healthy
     volumes:
       # --- この部分を修正 ---
-      # config.ymlの同期だけを残す
-      - ./config.yml:/app/config.yml
+      # コンテナのルートに設定ファイルをマウント
+      - ./config.yml:/config.yml
     restart: unless-stopped
     tty: true
 
@@ -38,7 +38,9 @@ services:
     volumes:
       - ./voice-analysis-service:/app
       - ./sample-voice:/app/sample-voice
-      - ./config.yml:/app/config.yml
+      # --- この部分を修正 ---
+      # コンテナのルートに設定ファイルをマウント
+      - ./config.yml:/config.yml
     tty: true
 
 volumes:
