@@ -1,32 +1,43 @@
-# If you prefer the allow list template instead of the deny list, see community template:
-# https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
-#
-# Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
+# --------------------
+# 設定ファイル
+# --------------------
+# 秘密情報を含む設定ファイルはバージョン管理から除外する
+config.yml
 
-# Test binary, built with `go test -c`
-*.test
+# --------------------
+# Python
+# --------------------
+# 仮想環境
+/venv/
+# Pythonキャッシュ
+/voice-analysis-service/__pycache__/
+*.pyc
 
-# Code coverage profiles and other test artifacts
-*.out
-coverage.*
-*.coverprofile
-profile.cov
+# --------------------
+# Node.js
+# --------------------
+# 依存関係ライブラリ
+/frontend/node_modules
+# ビルド成果物
+/frontend/build
+# ログファイル
+npm-debug.log*
+yarn-error.log
 
-# Dependency directories (remove the comment below to include it)
-# vendor/
+# --------------------
+# Go
+# --------------------
+# ビルド成果物
+/api-server/server-binary
 
-# Go workspace file
-go.work
-go.work.sum
+# --------------------
+# テストデータ
+# --------------------
+# サンプル音声ファイルはリポジトリに含めない
+/sample-voice/
 
-# env file
-.env
-
-# Editor/IDE
-# .idea/
-# .vscode/
+# --------------------
+# OS固有のファイル
+# --------------------
+.DS_Store
+Thumbs.db
