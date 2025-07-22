@@ -1,0 +1,35 @@
+# ----------------------------------------------------
+# Life-Assist System - 中央設定ファイル
+# ----------------------------------------------------
+
+# データベース設定 (PostgreSQL)
+database:
+  host: "db"
+  port: 5432
+  user: "user"
+  password: "password"
+  dbname: "lifedb"
+  sslmode: "disable"
+
+# サービス間通信用のURL
+services:
+  voice_analysis_url: "http://voice-analysis-service:8000/v1/analyze"
+
+# サーバーがコンテナ内部でリッスンするポート番号
+server_ports:
+  api_server: 8080
+  voice_analysis_service: 8000
+
+# AIモデル設定
+models:
+  # 使用するWhisperモデルのサイズ (tiny, base, small, medium, large)
+  whisper_model_size: "base"
+  
+  # 話者分離モデルで利用するHugging Faceのアクセストークン
+  # 【重要】このトークンは秘密情報です。
+  hugging_face_token: "YOUR_HUGGING_FACE_TOKEN_HERE"
+
+# 計算リソース設定
+compute:
+  # 使用するデバイス (cpu or gpu)
+  device: "cpu"

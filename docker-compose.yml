@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=lifedb
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d lifedb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api-server:
+    build: ./api-server
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      # --- この部分を修正 ---
+      # config.ymlの同期だけを残す
+      - ./config.yml:/app/config.yml
+    restart: unless-stopped
+    tty: true
+
+  voice-analysis-service:
+    build: ./voice-analysis-service
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./voice-analysis-service:/app
+      - ./sample-voice:/app/sample-voice
+      - ./config.yml:/app/config.yml
+    tty: true
+
+volumes:
+  postgres_data:
